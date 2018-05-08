@@ -1,3 +1,3 @@
 const gdax = require('./Exchanges/gdax.js');
 
-gdax.log();
+gdax.getCoinInfo('ETH-USD');
