@@ -7,7 +7,7 @@ const publicClient = new Gdax.PublicClient();
 const websocket = new Gdax.WebsocketClient(['ETH-USD']);
 
 websocket.on('message', data => {
-    if(data.reason === 'filled'){
+    if(data.reason === 'filled' && data.price !== undefined){
         console.log(data.price);
     }
 });
