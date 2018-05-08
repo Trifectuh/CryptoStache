@@ -1,1 +1,3 @@
-//MAKE HELLA MONEY
+const gdax = require('./Exchanges/gdax.js');
+
+gdax.log();
