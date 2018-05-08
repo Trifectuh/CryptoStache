@@ -39,7 +39,9 @@ var gdax = {
         });
     },
 
-    socket: new Gdax.WebsocketClient('ETH-USD')
+    priceFeed: function(coin){
+        return new Gdax.WebsocketClient(coin);
+    }
 
 
 };
