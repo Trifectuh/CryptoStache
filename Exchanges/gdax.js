@@ -4,14 +4,6 @@ const GTT = require('gdax-trading-toolkit');
 const logger = GTT.utils.ConsoleLoggerFactory();
 const publicClient = new Gdax.PublicClient();
 
-const websocket = new Gdax.WebsocketClient(['ETH-USD']);
-
-websocket.on('message', data => {
-    if(data.reason === 'filled' && data.price !== undefined){
-        console.log(data.price);
-    }
-});
-
 var gdax = {
     getCoinInfo: function(coin) {
         publicClient
@@ -37,9 +29,18 @@ var gdax = {
         });
     },
 
-    printCurrentPrice: function(){
-        console.log(websocket);
-    }
+    openSocket: function(coin){
+        const websocket = new Gdax.WebsocketClient(coin);
+
+        websocket.on('message', data => {
+            if(data.reason === 'filled' && data.price !== undefined){
+                console.log(data.price);
+            }
+        });
+    },
+
+    socket: new Gdax.WebsocketClient('ETH-USD')
+
 
 };
 
