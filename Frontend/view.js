@@ -32,7 +32,7 @@ var view = {
         console.log('P/L this run: ' + profit);
     }
     
-    powerlogo: function() {
+    powerfunction: function() {
         console.log(" oooooooo8                                       o8                oooooooo8    o8                           oooo                    ");
         console.log("o888     88 oo oooooo   oooo   oooo ooooooooo   o888oo   ooooooo   888         o888oo   ooooooo     ooooooo    888ooooo    ooooooooo8"); 
         console.log("888          888    888  888   888   888    888  888   888     888  888oooooo   888     ooooo888  888     888  888   888  888oooooo8 "); 
