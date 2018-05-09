@@ -1,10 +1,10 @@
 var test = {
-    name: 'test algorithm',
+    name: 'Test Algorithm',
     type: 'bad',
     suggestedPairs: ['BTC-USD', 'ETH-USD'],
 
-    run: function (exchange, pair) {
-        console.log('started strategy \'test\' on pair ' + pair + ' at ' + exchange.name);
+    run: function (exchange, pair, view) {
+        view.infoBar(this.name, pair, exchange.name);
         if (!test.suggestedPairs.includes(pair)){
             console.log('This strategy isn\'t meant to be used with this pair. ' +
                         'I hope you know what you\'re doing...');
@@ -28,10 +28,10 @@ var test = {
                         soldPrice = data.price;
                     }
                     if (boughtPrice < data.price) {
-                        console.log('holding position at ' + boughtPrice);
+                        view.status('holding position at ' + boughtPrice);
                     }
                     else {
-                        console.log('going up! bought at ' + data.price);
+                        view.alert('going up! bought at ' + data.price);
                         boughtPrice = data.price;
                     }
                 }
@@ -40,16 +40,16 @@ var test = {
                         prevPrice = data.price;
                     }
                     else {
-                        console.log('PANIC! sold at ' + data.price);
+                        view.alert('PANIC! sold at ' + data.price);
                         prevPrice = data.price;
                         soldPrice = data.price;
                         profit = profit + (soldPrice - boughtPrice);
-                        console.log('made ' + (soldPrice - boughtPrice) + ' USD on that one dawg.');
-                        console.log('profit this run: ' + profit);
+                        view.tradeResult((soldPrice - boughtPrice));
+                        view.pandl(profit);
                         boughtPrice = 0;
                     }
                 }
-                console.log(data.price);
+                view.priceStream(data.price, data.time);
             }
         })
     }

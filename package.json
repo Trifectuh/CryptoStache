@@ -5,7 +5,9 @@
   "main": "app.js",
   "dependencies": {
     "gdax": "^0.7.0",
-    "gdax-trading-toolkit": "^0.3.1"
+    "gdax-candles": "^1.4.2",
+    "gdax-trading-toolkit": "^0.3.1",
+    "jetty": "^0.2.1"
   },
   "devDependencies": {},
   "scripts": {
