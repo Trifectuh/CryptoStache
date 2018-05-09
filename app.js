@@ -2,7 +2,7 @@
 const exchanges = require('./Exchanges/exchanges.js');
 const strategies = require('./Strategies/strategies.js');
 const view = require('./Frontend/view.js');
-
+view.powerfunction();
 // set configuration for this run.
 // these should be set by command-line arguments in the future
 const config = {
