@@ -1,46 +1,15 @@
-const gdax = require('./Exchanges/gdax.js');
+// import exchanges and strategies
+const exchanges = require('./Exchanges/exchanges.js');
+const strategies = require('./Strategies/strategies.js');
 
-var ethFeed = gdax.priceFeed('ETH-USD');
-var prevPrice = 0;
-var boughtPrice = 0;
-var soldPrice = 0;
-var profit = 0;
+// set configuration for this run.
+// these should be set by command-line arguments in the future
+const config = {
+    exchange: exchanges.gdax,
+    pair: 'ETH-USD',
+    strategy: strategies.test
+};
 
-//mock algo to see if this actually works.
-ethFeed.on('message', data => {
-    if(data.reason === 'filled' && data.price !== undefined){
-        if (prevPrice === 0){
-            prevPrice = data.price;
-        }
-        if (data.price > prevPrice){
-            prevPrice = data.price;
-            if (boughtPrice === 0)
-            {
-                boughtPrice = data.price;
-                soldPrice = data.price;
-            }
-            if(boughtPrice < data.price){
-                console.log('holding position at ' + boughtPrice);
-            }
-            else{
-                console.log('going up! bought at ' + data.price);
-                boughtPrice = data.price;
-            }
-        }
-        if (data.price < prevPrice){
-            if(boughtPrice === 0){
-                prevPrice = data.price;
-            }
-            else {
-                console.log('PANIC! sold at ' + data.price);
-                prevPrice = data.price;
-                soldPrice = data.price;
-                profit = profit + (soldPrice - boughtPrice);
-                console.log('made ' + (soldPrice - boughtPrice) + ' USD on that one dawg.');
-                console.log('profit this run: ' + profit);
-                boughtPrice = 0;
-            }
-        }
-        console.log(data.price);
-    }
-});
+// run the strategy on the exchange for chosen pair
+config.strategy.run(config.exchange, config.pair);
+

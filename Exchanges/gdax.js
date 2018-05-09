@@ -41,7 +41,9 @@ var gdax = {
 
     priceFeed: function(coin){
         return new Gdax.WebsocketClient(coin);
-    }
+    },
+
+    name: 'Gdax'
 
 
 };
