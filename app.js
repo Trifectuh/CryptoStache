@@ -2,7 +2,7 @@
 const exchanges = require('./Exchanges/exchanges.js');
 const strategies = require('./Strategies/strategies.js');
 const view = require('./Frontend/view.js');
-view.powerfunction();
+
 // set configuration for this run.
 // these should be set by command-line arguments in the future
 const config = {
@@ -10,7 +10,8 @@ const config = {
     pair: 'ETH-USD',
     strategy: strategies.test
 };
-
+// populate the UI with all the stuff we wanna look at
+view.populateUI();
 // run the strategy on the exchange for chosen pair
 config.strategy.run(config.exchange, config.pair, view);
 

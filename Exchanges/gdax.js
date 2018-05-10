@@ -29,16 +29,6 @@ var gdax = {
         });
     },
 
-    openSocket: function(coin){
-        const websocket = new Gdax.WebsocketClient(coin);
-
-        websocket.on('message', data => {
-            if(data.reason === 'filled' && data.price !== undefined){
-                console.log(data.price);
-            }
-        });
-    },
-
     priceFeed: function(coin){
         return new Gdax.WebsocketClient(coin);
     },
