@@ -8,7 +8,7 @@ const view = require('./Frontend/view.js');
 const config = {
     exchange: exchanges.gdax,
     pair: 'ETH-USD',
-    strategy: strategies.test
+    strategy: strategies.indicatortest,
 };
 // populate the UI with all the stuff we wanna look at
 view.populateUI();

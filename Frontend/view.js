@@ -13,7 +13,6 @@ var view = {
     priceStream: function(price, timestamp) {
         readline.cursorTo(process.stdout, 77, 8);
         process.stdout.write('Current price: ' + price + '  ' + timestamp);
-        console.log('the price changed');
     },
 
     alert: function(alert) {
@@ -70,7 +69,19 @@ var view = {
         process.stdout.write('Alerts: null');
         readline.cursorTo(process.stdout, 0, 12);
         process.stdout.write('-------------------------------------------------------------------------------------------------------------------------------------');
+        readline.cursorTo(process.stdout, 0, 13);
+        process.stdout.write('Most recent candle:');
+    },
+
+    candle: function(candle) {
+        readline.cursorTo(process.stdout, 20, 13);
+        process.stdout.write('Open: ' + JSON.stringify(candle.open) +
+        '   Close: ' + JSON.stringify(candle.close) +
+        '   High: ' + JSON.stringify(candle.high) +
+        '   Low: ' + JSON.stringify(candle.low) +
+        '   Volume: ' + JSON.stringify(candle.volume));
     }
+
 };
 
 module.exports = view;

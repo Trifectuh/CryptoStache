@@ -1,10 +1,13 @@
 const Gdax = require('gdax');
+const Chart = require('gdax-candles');
 const GTT = require('gdax-trading-toolkit');
 
 const logger = GTT.utils.ConsoleLoggerFactory();
 const publicClient = new Gdax.PublicClient();
 
 var gdax = {
+    name: 'Gdax',
+
     getCoinInfo: function(coin) {
         publicClient
             .getProductTicker(coin)
@@ -29,13 +32,13 @@ var gdax = {
         });
     },
 
-    priceFeed: function(coin){
-        return new Gdax.WebsocketClient(coin);
+    priceFeed: function(pair){
+        return new Gdax.WebsocketClient(pair);
     },
 
-    name: 'Gdax'
-
-
+    chart: function(pair, timeframe){
+        return new Chart({ product: pair, timeframe: timeframe }).start();
+    }
 };
 
 module.exports = gdax;
