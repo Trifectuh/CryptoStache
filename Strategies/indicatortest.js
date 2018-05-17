@@ -1,5 +1,5 @@
 const macd = require('./Indicators/macd.js');
-const chart = require('')
+const chart = require('./Indicators/chart.js');
 
 var indicatortest = {
     name: 'Indicator Test',
