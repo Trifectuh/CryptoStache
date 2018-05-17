@@ -36,7 +36,7 @@ var gdax = {
         return new Gdax.WebsocketClient(pair);
     },
 
-    chart: function(pair, timeframe){
+    ticker: function(pair, timeframe){
         return new Chart({ product: pair, timeframe: timeframe }).start();
     }
 };

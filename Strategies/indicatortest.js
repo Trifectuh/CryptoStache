@@ -1,5 +1,5 @@
 const macd = require('./Indicators/macd.js');
-const chart = require('./Indicators/chart.js');
+const chart = require('./Utilities/chart.js');
 
 var indicatortest = {
     name: 'Indicator Test',
@@ -7,12 +7,11 @@ var indicatortest = {
     suggestedPairs: ['BTC-USD', 'ETH-USD'],
     suggestedTimeframes: ['1m', '15m', '1h', '4h', '1d'],
 
-    run: function (exchange, pair, view) {
-        const timeframe = '1m';
+    run: function (exchange, pair, view, timeframe) {
         const _exchange = exchange;
         const _pair = pair;
         const priceFeed = _exchange.priceFeed(_pair);
-        const chart = _exchange.chart(_pair, '5s');
+        const ticker = _exchange.ticker(_pair, timeframe);
 
         view.infoBar(this.name, pair, exchange.name);
         if (!this.suggestedPairs.includes(pair)) {
@@ -26,7 +25,12 @@ var indicatortest = {
             }
         });
 
-        macd.run(chart, view);
+        ticker.on('close', candle => {
+            view.alert('Last candle closed at ' + candle.close);
+            view.candle(candle);
+        });
+
+        chart.run(ticker, view);
     }
 };
 

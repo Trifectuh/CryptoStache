@@ -11,13 +11,11 @@ var chart = {
     currentCandle: null,
 
     run: function (chart, view) {
-        view.alert('macd running!');
         chart.on('close', candle => {
             view.alert('Last candle closed at ' + candle.close);
             view.candle(candle);
             this.addCandleToHistory(candle);
             this.currentCandle = candle;
-            this.checkSignal(this.candleHistory);
         });
     },
 
