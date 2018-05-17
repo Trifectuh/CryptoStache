@@ -1,7 +1,6 @@
 const Chart = require('gdax-candles');
-const tulind = require('tulind');
 
-var macd = {
+var chart = {
     candleHistory: {
         open: [],
         close: [],
@@ -21,14 +20,6 @@ var macd = {
             this.checkSignal(this.candleHistory);
         });
     },
-    //sma for testing. should be macd or two moving averages.
-    checkSignal: function(candleChart){
-        var close = candleChart.close;
-        tulind.indicators.sma.indicator([this.candleHistory.close], [3], function(err, results) {
-            //console.log("Result of sma is:");
-            //console.log(JSON.stringify(results[0]));
-        });
-    },
 
     addCandleToHistory: function(candle){
         this.candleHistory.open.push(candle.open);
@@ -39,4 +30,4 @@ var macd = {
     }
 };
 
-module.exports = macd;
+module.exports = chart;
