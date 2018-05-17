@@ -1,5 +1,5 @@
-const macd = require('./Indicators/macd.js');
 const chart = require('./Utilities/chart.js');
+const tulind = require('tulind');
 
 var indicatortest = {
     name: 'Indicator Test',
@@ -30,7 +30,15 @@ var indicatortest = {
             view.candle(candle);
         });
 
-        chart.run(ticker, view);
+        chart.run(ticker);
+
+        ticker.on('close', candle => {
+            tulind.indicators.sma.indicator([chart.candleHistory.close], [3], function(err, results) {
+                console.log("Result of sma is:");
+                console.log(JSON.stringify(results[0]));
+            });
+        });
+
     }
 };
 

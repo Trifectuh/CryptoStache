@@ -10,10 +10,8 @@ var chart = {
     },
     currentCandle: null,
 
-    run: function (chart, view) {
-        chart.on('close', candle => {
-            view.alert('Last candle closed at ' + candle.close);
-            view.candle(candle);
+    run: function (ticker) {
+        ticker.on('close', candle => {
             this.addCandleToHistory(candle);
             this.currentCandle = candle;
         });

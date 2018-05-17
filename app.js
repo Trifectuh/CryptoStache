@@ -1,13 +1,14 @@
 // import exchanges and strategies
 const exchanges = require('./Exchanges/exchanges.js');
 const strategies = require('./Strategies/strategies.js');
+
 const view = require('./Frontend/view.js');
 const fs = require('fs');
 
 // set configuration for this run.
 // these should be set by command-line arguments in the future
-var configContents = fs.readFileSync("config.json");
-var config = JSON.parse(configContents);
+const configContents = fs.readFileSync("config.json");
+const config = JSON.parse(configContents);
 /*const config = {
     exchange: exchanges.gdax,
     pair: 'ETH-USD',
