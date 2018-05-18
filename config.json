@@ -2,5 +2,5 @@
   "exchange": "gdax",
   "pair": "ETH-USD",
   "strategy": "smapricecompare",
-  "timeframe": "1s"
+  "timeframe": "15s"
 }

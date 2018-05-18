@@ -4,6 +4,7 @@
   "description": "probably go broke",
   "main": "app.js",
   "dependencies": {
+    "asciichart": "^1.5.7",
     "gdax": "^0.7.0",
     "gdax-candles": "^1.4.2",
     "gdax-trading-toolkit": "^0.3.1",

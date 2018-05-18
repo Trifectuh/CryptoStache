@@ -1,4 +1,5 @@
 const readline = require('readline');
+const asciichart = require('asciichart');
 
 var view = {
     infoBar: function(strategy, pair, exchange) {
@@ -87,7 +88,24 @@ var view = {
     indicator: function(message) {
         readline.cursorTo(process.stdout, 0, 14);
         process.stdout.write('Indicator Info: ' + message);
-    }
+    },
+
+    chart: function(pricedata){
+        readline.cursorTo(process.stdout, 0, 16);
+        if(pricedata.length < 3){
+            process.stdout.write('Waiting for chart data...');
+        }
+        // Hacky workaround for when the first few entries are identical:
+        else if(pricedata.length == 3){
+            pricedata[0] -= 0.01;
+            process.stdout.write(asciichart.plot(pricedata, { height: 6 }));
+        }
+        else if(pricedata.length <= 116){
+            process.stdout.write(asciichart.plot(pricedata, { height: 6 }));
+        }
+        else process.stdout.write(asciichart.plot(pricedata.slice(pricedata.length-116, pricedata.length-1),
+                { height: 6 }));
+        }
 
 };
 
