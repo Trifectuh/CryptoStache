@@ -26,10 +26,9 @@ var strategy = {
         chart.run(candleBuilder);
 
         // Strategy Description:
-        // If the price is above the 9 period SMA, buy. If it's below, sell.
-        // Simple test strat using tulip indicators
+        // If the price is above the SMA, buy. If it's below, sell.
         candleBuilder.on('close', candle => {
-            tulind.indicators.sma.indicator([chart.candleHistory.close], [9], function(err, results) {
+            tulind.indicators.sma.indicator([chart.candleHistory.close], [30], function(err, results) {
                 const smaResult = parseFloat(results[0][results[0].length - 1]).toFixed(2);
                 if (isNaN(smaResult)){
                     view.indicator('Waiting for data...');
@@ -38,19 +37,19 @@ var strategy = {
                     view.indicator("SMA 9: $" + smaResult + '      ');
                     if(candle.close > smaResult){
                         if(lastBuy !== 0 && lastBuy < candle.close){
-                            view.status('Holding 1 ETH at $' + lastBuy + ': $' +
-                                (candle.close - lastBuy).toFixed(2) + ' unrealized P/L     ');
+                            view.status('Holding 0.01 ETH at $' + lastBuy + ': $' +
+                                ((candle.close - lastBuy)/100).toFixed(2) + ' unrealized P/L            ');
                         }
                         else{
-                            view.status('Bought 1 ETH at $' + candle.close + '         ');
+                            view.status('Bought 0.01 ETH at $' + candle.close + '                       ');
                             lastBuy = candle.close;
                         }
                     }
                     else if(candle.close < smaResult){
                         if(lastBuy !== 0){
-                            view.status('Sold 1 ETH at $' + candle.close  + ': $' +
-                                (candle.close - lastBuy).toFixed(2) + ' realized P/L     ');
-                            tradeProfit = candle.close - lastBuy;
+                            view.status('Sold 0.01 ETH at $' + candle.close  + ': $' +
+                                ((candle.close - lastBuy)/100).toFixed(2) + ' realized P/L              ');
+                            tradeProfit = (candle.close - lastBuy)/100;
                             view.tradeResult(tradeProfit);
                             runProfit += tradeProfit;
                             view.pandl(runProfit);

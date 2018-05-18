@@ -26,8 +26,7 @@ var strategy = {
         chart.run(candleBuilder);
 
         // Strategy Description:
-        // If the price is above the 9 period SMA, buy. If it's below, sell.
-        // Simple test strat using tulip indicators
+        //
         candleBuilder.on('close', candle => {
             // Test indicator against chart.candleHistory like this:
             tulind.indicators.sma.indicator([chart.candleHistory.close], [9], function(err, results) {

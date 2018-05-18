@@ -4,9 +4,9 @@ var view = {
     infoBar: function(strategy, pair, exchange) {
         readline.cursorTo(process.stdout, 0, 8);
         process.stdout.write('Strategy: ' + strategy);
-        readline.cursorTo(process.stdout, 28, 8);
+        readline.cursorTo(process.stdout, 35, 8);
         process.stdout.write('Pair: ' + pair);
-        readline.cursorTo(process.stdout, 45, 8);
+        readline.cursorTo(process.stdout, 52, 8);
         process.stdout.write('Exchange: ' + exchange);
     },
 
@@ -54,7 +54,7 @@ var view = {
         readline.cursorTo(process.stdout, 0, 7);
         process.stdout.write('-------------------------------------------------------------------------------------------------------------------------------------');
         readline.cursorTo(process.stdout, 0, 8);
-        process.stdout.write('Strategy:                   Pair:            Exchange:     ');
+        process.stdout.write('Strategy:                          Pair:            Exchange:     ');
         readline.cursorTo(process.stdout, 77, 8);
         process.stdout.write('Current price: $$$$$$$$$$$$  $$$$$$$$$$$$$$$$$$$$$$$$$$$');
         readline.cursorTo(process.stdout, 0, 9);
@@ -81,7 +81,7 @@ var view = {
         '   Close: ' + JSON.stringify(candle.close) +
         '   High: ' + JSON.stringify(candle.high) +
         '   Low: ' + JSON.stringify(candle.low) +
-        '   Volume: ' + JSON.stringify(candle.volume));
+        '   Volume: ' + JSON.stringify(candle.volume) + '                           ');
     },
 
     indicator: function(message) {
