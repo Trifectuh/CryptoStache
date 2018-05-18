@@ -32,11 +32,11 @@ var gdax = {
         });
     },
 
-    priceFeed: function(pair){
+    priceStream: function(pair){
         return new Gdax.WebsocketClient(pair);
     },
 
-    ticker: function(pair, timeframe){
+    candleBuilder: function(pair, timeframe){
         return new Chart({ product: pair, timeframe: timeframe }).start();
     }
 };

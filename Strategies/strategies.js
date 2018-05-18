@@ -1,6 +1,6 @@
 var strategies = {
-    test: require('./test.js'),
-    indicatortest: require('./indicatortest.js'),
+    template: require('./template.js'),
+    smapricecompare: require('./smapricecompare.js'),
 };
 
 module.exports = strategies;

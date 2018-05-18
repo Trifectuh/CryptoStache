@@ -12,7 +12,7 @@ var view = {
 
     priceStream: function(price, timestamp) {
         readline.cursorTo(process.stdout, 77, 8);
-        process.stdout.write('Current price: ' + price + '  ' + timestamp);
+        process.stdout.write('Current price: $' + price + '       ' + timestamp);
     },
 
     alert: function(alert) {
@@ -27,12 +27,12 @@ var view = {
 
     tradeResult: function(res) {
         readline.cursorTo(process.stdout, 77, 11);
-        process.stdout.write('Last Trade P/L: ' + res);
+        process.stdout.write('Last Trade P/L: $' + res.toFixed(2));
     },
 
     pandl: function(profit) {
         readline.cursorTo(process.stdout, 77, 10);
-        process.stdout.write('Profit/Loss: ' + profit);
+        process.stdout.write('Profit/Loss: $' + profit.toFixed(2));
     },
     
     populateUI: function() {
@@ -54,32 +54,39 @@ var view = {
         readline.cursorTo(process.stdout, 0, 7);
         process.stdout.write('-------------------------------------------------------------------------------------------------------------------------------------');
         readline.cursorTo(process.stdout, 0, 8);
-        process.stdout.write('Strategy: null              Pair: null       Exchange: null');
+        process.stdout.write('Strategy:                   Pair:            Exchange:     ');
         readline.cursorTo(process.stdout, 77, 8);
         process.stdout.write('Current price: $$$$$$$$$$$$  $$$$$$$$$$$$$$$$$$$$$$$$$$$');
         readline.cursorTo(process.stdout, 0, 9);
         process.stdout.write('-------------------------------------------------------------------------------------------------------------------------------------');
         readline.cursorTo(process.stdout, 0, 10);
-        process.stdout.write('Current Trade: null');
+        process.stdout.write('Current Trade:     ');
         readline.cursorTo(process.stdout, 77, 10);
-        process.stdout.write('Profit/Loss: null');
+        process.stdout.write('Profit/Loss:     ');
         readline.cursorTo(process.stdout, 77, 11);
-        process.stdout.write('Last Trade P/L: null');
+        process.stdout.write('Last Trade P/L:     ');
         readline.cursorTo(process.stdout, 0, 11);
-        process.stdout.write('Alerts: null');
+        process.stdout.write('Alerts:     ');
         readline.cursorTo(process.stdout, 0, 12);
         process.stdout.write('-------------------------------------------------------------------------------------------------------------------------------------');
         readline.cursorTo(process.stdout, 0, 13);
-        process.stdout.write('Most recent candle:');
+        process.stdout.write('Most recent candle: ');
+        readline.cursorTo(process.stdout, 0, 14);
+        process.stdout.write('Indicator Info: ');
     },
 
     candle: function(candle) {
-        readline.cursorTo(process.stdout, 20, 13);
-        process.stdout.write('Open: ' + JSON.stringify(candle.open) +
+        readline.cursorTo(process.stdout, 0, 13);
+        process.stdout.write('Most recent candle: Open: ' + JSON.stringify(candle.open) +
         '   Close: ' + JSON.stringify(candle.close) +
         '   High: ' + JSON.stringify(candle.high) +
         '   Low: ' + JSON.stringify(candle.low) +
         '   Volume: ' + JSON.stringify(candle.volume));
+    },
+
+    indicator: function(message) {
+        readline.cursorTo(process.stdout, 0, 14);
+        process.stdout.write('Indicator Info: ' + message);
     }
 
 };

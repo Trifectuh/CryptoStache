@@ -1,6 +1,6 @@
 {
   "exchange": "gdax",
   "pair": "ETH-USD",
-  "strategy": "indicatortest",
-  "timeframe": "5s"
+  "strategy": "smapricecompare",
+  "timeframe": "1s"
 }
