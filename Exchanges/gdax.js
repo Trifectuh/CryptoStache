@@ -1,18 +1,18 @@
 const Gdax = require('gdax');
 const Chart = require('gdax-candles');
-const GTT = require('gdax-trading-toolkit');
 const view = require('../Frontend/view');
+const fs = require("fs");
 
-const key = '';
-const secret = '';
-const passphrase = '';
+const configContents = fs.readFileSync("config.json");
+const config = JSON.parse(configContents);
+
 const apiURI = 'https://api.gdax.com';
 const sandboxURI = 'https://api-public.sandbox.gdax.com';
 
 const authedClient = new Gdax.AuthenticatedClient(
-    key,
-    secret,
-    passphrase,
+    config.gdax.key,
+    config.gdax.secret,
+    config.gdax.passphrase,
     sandboxURI
 );
 
@@ -20,7 +20,7 @@ var gdax = {
     name: 'Gdax',
 
     log: function(price, size, product_id) {
-        view.alert(price + size + product_id);
+        view.status(size + " " + product_id + " at " + price);
     },
 
     buy: function(price, size, product_id) {
