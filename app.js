@@ -13,3 +13,5 @@ const config = JSON.parse(configContents);
 view.populateUI();
 // run the strategy on the exchange for chosen pair
 strategies[config.strategy].run(exchanges[config.exchange], config.pair, view, config.timeframe);
+
+exchanges.gdax.sell(200, 0.1, 'ETH-USD');
