@@ -19,22 +19,26 @@ const authedClient = new Gdax.AuthenticatedClient(
 var gdax = {
     name: 'Gdax',
 
+    getFills: function() {
+        view.status(JSON.stringify(authedClient.getFills()));
+    },
+
     log: function(price, size, product_id) {
         view.status(size + " " + product_id + " at " + price);
     },
 
     buy: function(price, size, product_id) {
         const buyParams = {
-            price: price, // USD
+            type: 'market', // USD
             size: size, // ETH
             product_id: product_id,
         };
-        authedClient.buy(buyParams, this.log(price, size, product_id));
+        authedClient.buy(buyParams, this.log(size, product_id));
     },
 
     sell: function(price, size, product_id) {
         const buyParams = {
-            price: price, // USD
+            type: 'market',
             size: size, // ETH
             product_id: product_id,
         };
