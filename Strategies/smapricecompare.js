@@ -38,11 +38,11 @@ var strategy = {
                     view.indicator("SMA: $" + smaResult + '        ');
                     if (candle.close > smaResult) {
                         if (lastBuy !== 0 && lastBuy < candle.close) {
-                            view.status('Holding 0.1 ETH at $' + lastBuy + ': $' +
+                            view.status('Holding 0.5 ETH at $' + lastBuy + ': $' +
                                 ((candle.close - lastBuy) / 10).toFixed(2) + ' unrealized P/L            ');
                         } else if (lastBuy == 0) {
                             exchange.buy(candle.close, 0.5, pair);
-                            view.status('Bought 0.1 ETH at $' + candle.close + '                       ');
+                            view.status('Bought 0.5 ETH at $' + candle.close + '                       ');
                             lastBuy = candle.close;
                         }
                     } else if (candle.close < smaResult) {
