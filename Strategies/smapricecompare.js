@@ -82,10 +82,10 @@ function usageCheck(pair, timeframe) {
 function openPriceStream(exchange, pair, view) {
     const priceStream = exchange.priceStream(pair);
     priceStream.on('message', data => {
-        if (data.reason === 'filled' && data.price !== undefined) {
-            var parsedPrice = parseFloat(data.price).toFixed(2);
-            strategy.view.priceStream(parsedPrice, data.time);
-        }
+
+        var parsedPrice = parseFloat(data.price).toFixed(2);
+        strategy.view.priceStream(parsedPrice, data.time);
+
     });
 }
 
