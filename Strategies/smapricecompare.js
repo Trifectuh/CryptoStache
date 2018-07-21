@@ -29,7 +29,7 @@ var strategy = {
         // Strategy Description:
         // If the price is above the SMA, buy. If it's below, sell.
         candleBuilder.on('close', candle => {
-            tulind.indicators.sma.indicator([chart.candleHistory.close], [30], function(err, results) {
+            tulind.indicators.ema.indicator([chart.candleHistory.close], [30], function(err, results) {
                 view.chart(chart.candleHistory.close);
                 const smaResult = parseFloat(results[0][results[0].length - 1]).toFixed(2);
                 if (isNaN(smaResult)) {
@@ -82,10 +82,10 @@ function usageCheck(pair, timeframe) {
 function openPriceStream(exchange, pair, view) {
     const priceStream = exchange.priceStream(pair);
     priceStream.on('message', data => {
-
-        var parsedPrice = parseFloat(data.price).toFixed(2);
-        strategy.view.priceStream(parsedPrice, data.time);
-
+        if (data.reason === 'filled' && data.price !== undefined) {
+            var parsedPrice = parseFloat(data.price).toFixed(2);
+            strategy.view.priceStream(parsedPrice, data.time);
+        }
     });
 }
 

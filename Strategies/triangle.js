@@ -18,32 +18,37 @@ var strategy = {
         var usdCanBuy = 0;
         var capital = 100;
         // Open constant price feed
-        const btcusdStream = exchange.candleBuilder('BTC-USD', '1s');
+        console.log('waiting for price data...');
+        const btcusdStream = exchange.candleBuilder('BTC-USD', timeframe);
         btcusdStream.on('close', data => {
-            /*if (data.reason === 'filled' && data.price !== NaN) {
+            if (data.price != null) {
                 btcusdPrice = data.price;
-                btcCanBuy = capital / btcusdPrice;
-            }*/
-            console.log(data);
-        });
-        const ethbtcStream = exchange.priceStream('ETH-BTC');
-        ethbtcStream.on('message', data => {
-            if (data.price !== NaN) {
-                ethbtcPrice = data.price;
-                ethCanBuy = btcCanBuy / ethbtcPrice;
             }
         });
-        const ethusdStream = exchange.priceStream('ETH-USD');
-        ethusdStream.on('message', data => {
-            if (data.reason === 'filled' && data.price !== NaN) {
-                ethusdPrice = data.price;
-                usdCanBuy = ethCanBuy * ethusdPrice;
-                /*   console.log('');
-                   console.log('Can buy: ' + btcCanBuy + ' BTC for ' + capital + ' USD');
-                   console.log('Then buy: ' + ethCanBuy + ' ETH');
-                   console.log('Then sell for: ' + usdCanBuy + ' USD'); */
-                var profit = usdCanBuy - capital;
-                capital = capital + profit;
+        const ethbtcStream = exchange.candleBuilder('ETH-BTC', timeframe);
+        ethbtcStream.on('close', data => {
+            if (data.price != null) {
+                ethbtcPrice = data.price;
+            }
+        });
+        const ethusdStream = exchange.candleBuilder('ETH-USD', timeframe);
+        ethusdStream.on('close', data => {
+            ethusdPrice = data.price;
+            if (data.price != null) {
+                if (btcusdPrice !== 0 && ethbtcPrice != 0 && ethusdPrice !== 0) {
+                    btcCanBuy = (capital * 0.997) / btcusdPrice;
+                    ethCanBuy = (btcCanBuy * 0.997) / ethbtcPrice;
+                    usdCanBuy = (ethCanBuy * 0.997) * ethusdPrice;
+                    var profit = usdCanBuy - capital;
+                    if (profit > 0) {
+                        console.log('');
+                        console.log('Can buy: ' + btcCanBuy + ' BTC at ' + btcusdPrice + ' for ' + capital.toFixed(2) + ' USD');
+                        console.log('Then buy: ' + ethCanBuy + ' ETH at ' + ethbtcPrice);
+                        console.log('Then sell for: ' + usdCanBuy + ' USD at ' + ethusdPrice);
+                        console.log('Profit: ' + profit);
+                        capital = capital + profit;
+                    } else console.log('bad trade found: ' + profit.toFixed(2));
+                }
             }
         });
     }
