@@ -1,10 +1,10 @@
+const fs = require('fs');
 // import exchanges and strategies
 const exchanges = require('./Exchanges/exchanges.js');
 const strategies = require('./Strategies/strategies.js');
-
+// import view controller and utilities
 const view = require('./Frontend/view.js');
 const priceStream = require('./Strategies/Utilities/priceStream.js')
-const fs = require('fs');
 
 // set configuration for this run based on config.json
 const configContents = fs.readFileSync("config.json");
