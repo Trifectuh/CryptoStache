@@ -29,8 +29,8 @@ var gdax = {
 
     buy: function(price, size, product_id) {
         const buyParams = {
-            type: 'market', // USD
-            size: size, // ETH
+            type: 'market',
+            size: size,
             product_id: product_id,
         };
         authedClient.buy(buyParams, this.log(size, product_id));
@@ -39,7 +39,7 @@ var gdax = {
     sell: function(price, size, product_id) {
         const buyParams = {
             type: 'market',
-            size: size, // ETH
+            size: size,
             product_id: product_id,
         };
         authedClient.sell(buyParams, this.log(price, size, product_id));

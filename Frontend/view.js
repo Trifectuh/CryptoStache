@@ -13,7 +13,7 @@ var view = {
 
     priceStream: function(price, timestamp) {
         readline.cursorTo(process.stdout, 77, 8);
-        process.stdout.write('Current price: $' + price + '       ' + timestamp);
+        process.stdout.write('Current price: $' + price + '                ' + timestamp);
     },
 
     alert: function(alert) {

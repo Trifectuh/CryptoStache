@@ -1,5 +1,6 @@
 const chart = require('./Utilities/chart.js');
 const tulind = require('tulind');
+const priceStream = require('./Utilities/priceStream.js');
 
 var strategy = {
     name: 'SMA Price Comparison',
@@ -15,7 +16,7 @@ var strategy = {
         view.infoBar(this.name, pair, exchange.name);
         usageCheck(pair, timeframe);
         // Open constant price feed and send it to the view
-        openPriceStream(exchange, pair, view);
+        priceStream.start(exchange, pair, view);
         // Turn on candleBuilder for specified timeframe and begin updates
         const candleBuilder = exchange.candleBuilder(pair, timeframe);
         startCandleView(candleBuilder);
@@ -78,7 +79,7 @@ function usageCheck(pair, timeframe) {
 }
 
 // Turn on constant price-feed and update view
-function openPriceStream(exchange, pair, view) {
+function openPriceStream(exchange, pair) {
     const priceStream = exchange.priceStream(pair);
     priceStream.on('message', data => {
         if (data.reason === 'filled' && data.price !== undefined) {
