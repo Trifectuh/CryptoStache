@@ -23,14 +23,13 @@ var strategy = {
         let lastBuy = 0;
         let tradeProfit = 0;
         let runProfit = 0;
-        // Start recording candle history for charting purposes
+        // Start recording candle history
         chart.run(candleBuilder);
 
         // Strategy Description:
         // If the price is above the SMA, buy. If it's below, sell.
         candleBuilder.on('close', candle => {
             tulind.indicators.ema.indicator([chart.candleHistory.close], [30], function(err, results) {
-                view.chart(chart.candleHistory.close);
                 const smaResult = parseFloat(results[0][results[0].length - 1]).toFixed(2);
                 if (isNaN(smaResult)) {
                     view.indicator('Waiting for data...');

@@ -1,5 +1,5 @@
 const readline = require('readline');
-const asciichart = require('asciichart');
+// const asciichart = require('asciichart');
 
 var view = {
     infoBar: function(strategy, pair, exchange) {
@@ -35,7 +35,7 @@ var view = {
         readline.cursorTo(process.stdout, 77, 10);
         process.stdout.write('Profit/Loss: $' + profit.toFixed(2));
     },
-    
+
     populateUI: function() {
         readline.clearScreenDown(process.stdout);
         readline.cursorTo(process.stdout, 0, 0);
@@ -79,10 +79,10 @@ var view = {
     candle: function(candle) {
         readline.cursorTo(process.stdout, 0, 13);
         process.stdout.write('Most recent candle: Open: ' + JSON.stringify(candle.open) +
-        '   Close: ' + JSON.stringify(candle.close) +
-        '   High: ' + JSON.stringify(candle.high) +
-        '   Low: ' + JSON.stringify(candle.low) +
-        '   Volume: ' + JSON.stringify(candle.volume) + '                           ');
+            '   Close: ' + JSON.stringify(candle.close) +
+            '   High: ' + JSON.stringify(candle.high) +
+            '   Low: ' + JSON.stringify(candle.low) +
+            '   Volume: ' + JSON.stringify(candle.volume) + '                           ');
     },
 
     indicator: function(message) {
@@ -90,22 +90,23 @@ var view = {
         process.stdout.write('Indicator Info: ' + message);
     },
 
-    chart: function(pricedata){
-        readline.cursorTo(process.stdout, 0, 16);
-        if(pricedata.length < 3){
-            process.stdout.write('Waiting for chart data...');
-        }
-        // Hacky workaround for when the first few entries are identical:
-        else if(pricedata.length == 3){
-            pricedata[0] -= 0.01;
-            process.stdout.write(asciichart.plot(pricedata, { height: 6 }));
-        }
-        else if(pricedata.length <= 116){
-            process.stdout.write(asciichart.plot(pricedata, { height: 6 }));
-        }
-        else process.stdout.write(asciichart.plot(pricedata.slice(pricedata.length-116, pricedata.length-1),
-                { height: 6 }));
-        }
+    /*  chart: function(pricedata){
+            readline.cursorTo(process.stdout, 0, 16);
+            if(pricedata.length < 3){
+                process.stdout.write('Waiting for chart data...');
+            }
+            // Hacky workaround for when the first few entries are identical:
+            else if(pricedata.length == 3){
+                pricedata[0] -= 0.01;
+                process.stdout.write(asciichart.plot(pricedata, { height: 6 }));
+            }
+            else if(pricedata.length <= 116){
+                process.stdout.write(asciichart.plot(pricedata, { height: 6 }));
+            }
+            else process.stdout.write(asciichart.plot(pricedata.slice(pricedata.length-116, pricedata.length-1),
+                    { height: 6 }));
+            }
+    */
 
 };
 
